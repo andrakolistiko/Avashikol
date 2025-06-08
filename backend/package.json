@@ -4,8 +4,8 @@
   "description": "Backend del sistema de eventos usando Node.js y MongoDB",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "dev": "nodemon index.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"No hay pruebas definidas aún\" && exit 0"
   },
   "keywords": [
@@ -22,6 +22,7 @@
     "body-parser": "^2.2.0",
     "connect-multiparty": "^2.2.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mongoose": "^8.15.1",
     "multer": "^2.0.1"
