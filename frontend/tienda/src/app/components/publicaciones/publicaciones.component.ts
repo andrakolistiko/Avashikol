@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { EventoService } from '../../services/evento.service';
+import { Evento } from '../../models/evento';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { FooterComponent } from '../footer/footer.component';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-publicaciones',
+  standalone: true,
+  imports: [CommonModule, RouterModule, NavbarComponent, FooterComponent],
+  templateUrl: './publicaciones.component.html',
+  styleUrls: ['./publicaciones.component.css']
+})
+export class PublicacionesComponent implements OnInit {
+  Math = Math;
+  eventos: Evento[] = [];
+
+  // Solo un ID visible o null
+  detallesVisibles: string | null = null;
+
+  constructor(private eventoService: EventoService) {}
+
+  ngOnInit() {
+    this.eventoService.getEventos().subscribe(data => {
+      this.eventos = data;
+    });
+  }
+
+  toggleDetalles(id?: string) {
+    if (!id) return;
+    // Si ya está abierto, cierra; si no, abre el nuevo
+    this.detallesVisibles = this.detallesVisibles === id ? null : id;
+  }
+
+  meInteresa(evento: Evento) {
+    alert(`¡Te interesa el evento: ${evento.titulo}!`);
+  }
+
+  getClaseCarta(index: number): string {
+    const mod = index % 3;
+    if (mod === 0 || mod === 1) return 'carta doble';
+    else return 'carta grande';
+  }
+}

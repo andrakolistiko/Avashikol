@@ -1,0 +1,45 @@
+#customCarousel {
+  max-width: 2000px;  /* ancho deseado */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-item {
+  height: 600px;      /* un poco más alto para impacto visual */
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  position: relative;
+  transition: transform 0.6s ease;
+}
+
+.carousel-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.3);  /* capa oscura para resaltar texto */
+  z-index: 1;
+}
+
+.caption {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 18px 25px;
+  max-width: 60%;
+  z-index: 2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+.caption h2 {
+  font-size: 2.8rem;
+  margin-bottom: 0.3em;
+}
+
+.caption p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+}

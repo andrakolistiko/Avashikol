@@ -1,0 +1,53 @@
+/* Fondo oscuro tech con texto claro */
+section.container-fluid {
+  background: #212529;
+  color: #FAD9FA;
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+/* Títulos con sombra y color vibrante */
+h2.fw-bold {
+  text-shadow: 1px 1px 3px rgba(255, 0, 255, 0.4);
+  color: #FAD9FA;
+}
+
+/* Texto estilizado para tech lovers */
+.lead, p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: #000000;
+}
+
+/* Botón con vibe oscura y elegante */
+.btn-primary {
+  background-color: #212529;
+  color: #FAD9FA;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #343a40;
+  color: #fff;
+  box-shadow: 0 0 10px #FAD9FA80;
+}
+
+/* Íconos tech con efecto animado */
+.bi {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.bi:hover {
+  transform: scale(1.2);
+  color: #ff00ff !important;
+}
+
+/* Responsive touch */
+@media (max-width: 767px) {
+  section.container-fluid {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}

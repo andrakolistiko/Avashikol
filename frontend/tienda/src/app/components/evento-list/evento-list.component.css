@@ -1,0 +1,165 @@
+* {
+  font-family: "Work Sans", sans-serif;
+  transition: all 0.3s ease;
+}
+.container {
+  max-width: 2000px;
+  min-height: 900px; /* o el tamaño que quieras para que se vea grande */
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+h2 {
+  text-align: center;
+  color: #FAD9FA;
+  margin-bottom: 1.5rem;
+}
+
+.intro,
+.guia {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.guia {
+  background: rgba(250, 217, 250, 0.3);
+  padding: 1rem;
+  border-left: 5px solid #FAD9FA;
+  border-radius: 6px;
+}
+
+.nuevo-btn {
+  margin-bottom: 1rem;
+  float: right;
+  font-weight: bold;
+  background-color: #FAD9FA;
+  color: #212529;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nuevo-btn:hover {
+  background-color: #e6bfe6;
+}
+
+.tabla-eventos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  background-color: #2b2f33;
+  color: #fff;
+}
+
+.tabla-eventos th,
+.tabla-eventos td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  text-align: center;
+}
+
+.tabla-eventos thead {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.acciones button {
+  margin: 0 4px;
+  font-size: 0.85rem;
+  background-color: #FAD9FA;
+  border: none;
+  color: #212529;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.acciones button:hover {
+  filter: brightness(0.9);
+}
+
+.imagen-mini {
+  max-width: 80px;
+  border-radius: 6px;
+  border: 1px solid #555;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #212529;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 95%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.modal-content h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #FAD9FA;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 0.8rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(250, 217, 250, 0.1);
+  color: #fff;
+  margin-top: 5px;
+}
+
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #ccc;
+}
+
+.botones-form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.detalles p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.imagen-evento {
+  margin-top: 0.5rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #444;
+}

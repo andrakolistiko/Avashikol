@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <h2><i class="fas fa-calendar-alt"></i> Gestión de Eventos</h2>
+
+  <button class="btn btn-primary nuevo-btn" (click)="nuevo()">
+    <i class="fas fa-plus-circle"></i> Nuevo Evento
+  </button>
+
+  <table class="tabla-eventos">
+    <thead>
+      <tr>
+        <th><i class="fas fa-heading"></i> Título</th>
+        <th><i class="fas fa-calendar-day"></i> Fecha</th>
+        <th><i class="fas fa-map-marker-alt"></i> Lugar</th>
+        <th><i class="fas fa-dollar-sign"></i> Precio</th>
+        <th><i class="fas fa-image"></i> Imagen</th>
+        <th><i class="fas fa-cogs"></i> Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evento of eventos">
+        <td>{{ evento.titulo }}</td>
+        <td>{{ evento.fecha | date:'mediumDate' }}</td>
+        <td>{{ evento.lugar }}</td>
+        <td>{{ evento.precio | currency:'USD':'symbol':'1.2-2' }}</td>
+        <td>
+          <img *ngIf="evento.imagen" [src]="evento.imagen" alt="Imagen evento" class="imagen-mini">
+        </td>
+        <td class="acciones">
+          <button class="btn btn-info" (click)="ver(evento)"><i class="fas fa-eye"></i> Ver</button>
+          <button class="btn btn-warning" (click)="editar(evento)"><i class="fas fa-edit"></i> Editar</button>
+          <button class="btn btn-danger" (click)="evento._id && eliminar(evento._id)"><i class="fas fa-trash-alt"></i> Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="eventoSeleccionado" class="modal">
+    <div class="modal-content">
+      <h3 *ngIf="!modoEdicion"><i class="fas fa-info-circle"></i> Detalles del Evento</h3>
+      <h3 *ngIf="modoEdicion">
+        <i class="fas" [ngClass]="eventoSeleccionado._id ? 'fa-edit' : 'fa-plus' "></i>
+        {{ eventoSeleccionado._id ? 'Editar Evento' : 'Nuevo Evento' }}
+      </h3>
+
+      <form *ngIf="modoEdicion" (ngSubmit)="guardar(eventoSeleccionado!)" #eventoForm="ngForm">
+        <label>
+          <i class="fas fa-heading"></i> Título:
+          <input type="text" [(ngModel)]="eventoSeleccionado.titulo" name="titulo" required />
+        </label>
+
+        <label>
+          <i class="fas fa-align-left"></i> Descripción:
+          <textarea [(ngModel)]="eventoSeleccionado.descripcion" name="descripcion" rows="3" required></textarea>
+        </label>
+
+        <label>
+          <i class="fas fa-calendar-alt"></i> Fecha:
+          <input type="date" [(ngModel)]="eventoSeleccionado.fecha" name="fecha" required />
+        </label>
+
+        <label>
+          <i class="fas fa-map-marker-alt"></i> Lugar:
+          <input type="text" [(ngModel)]="eventoSeleccionado.lugar" name="lugar" required />
+        </label>
+
+        <label>
+          <i class="fas fa-dollar-sign"></i> Precio:
+          <input type="number" [(ngModel)]="eventoSeleccionado.precio" name="precio" min="0" required />
+        </label>
+
+        <label>
+          <i class="fas fa-image"></i> URL Imagen:
+          <input type="url" [(ngModel)]="eventoSeleccionado.imagen" name="imagen" />
+        </label>
+
+        <div class="botones-form">
+          <button type="submit" [disabled]="!eventoForm.form.valid" class="btn btn-success">
+            <i class="fas fa-save"></i> Guardar
+          </button>
+          <button type="button" (click)="cancelar()" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="!modoEdicion" class="detalles">
+        <p><i class="fas fa-heading"></i> <strong>Título:</strong> {{ eventoSeleccionado.titulo }}</p>
+        <p><i class="fas fa-align-left"></i> <strong>Descripción:</strong> {{ eventoSeleccionado.descripcion }}</p>
+        <p><i class="fas fa-calendar-day"></i> <strong>Fecha:</strong> {{ eventoSeleccionado.fecha | date:'longDate' }}</p>
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Lugar:</strong> {{ eventoSeleccionado.lugar }}</p>
+        <p><i class="fas fa-dollar-sign"></i> <strong>Precio:</strong> {{ eventoSeleccionado.precio | currency:'USD' }}</p>
+        <p *ngIf="eventoSeleccionado.imagen">
+          <i class="fas fa-image"></i> <strong>Imagen:</strong><br />
+          <img [src]="eventoSeleccionado.imagen" alt="Imagen evento" class="imagen-evento" />
+        </p>
+        <button class="btn btn-primary" (click)="cancelar()">
+          <i class="fas fa-times-circle"></i> Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

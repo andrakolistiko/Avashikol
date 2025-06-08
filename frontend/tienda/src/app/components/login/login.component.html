@@ -1,0 +1,35 @@
+
+<app-navbar></app-navbar>
+<h1 style="text-align:center; font-size: 3rem; margin: 30px 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #007BFF;">
+  MEMENTO
+</h1>
+<p style="text-align:center; font-size: 1.1rem; color: #555; max-width: 400px; margin: 0 auto 30px auto;">
+  Porfa, ingresa tu usuario solo con letras y una contraseña con mínimo 6 caracteres para entrar a tu cuenta.
+</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <input formControlName="username" placeholder="Usuario" (keypress)="soloLetras($event)">
+  <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" style="color:red;">
+    <small>Usuario obligatorio y solo letras 🚫</small>
+  </div>
+
+  <input formControlName="password" type="password" placeholder="Contraseña">
+  <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" style="color:red;">
+    <small>Contraseña obligatoria y mínimo 6 caracteres 🔒</small>
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+
+  <div style="margin-top: 10px; display: flex; gap: 20px;">
+    <a href="/soporte" style="text-decoration: none; color: #007bff;">Soporte</a>
+    <a href="/recuperar" style="text-decoration: none; color: #007bff;">¿Olvidaste tu contraseña?</a>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center;">
+    <hr style="margin-bottom: 15px;"/>
+    <button type="button" (click)="loginWithGoogle()" style="background: #4285F4; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">
+      Iniciar sesión con Google
+    </button>
+  </div>
+</form>
+
+<app-footer></app-footer>

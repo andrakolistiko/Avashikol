@@ -1,0 +1,22 @@
+  <div id="customCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div 
+        *ngFor="let slide of slides; let i = index" 
+        class="carousel-item" 
+        [class.active]="i === 0"
+        [ngStyle]="{'background-image': 'url(' + slide.img + ')'}"
+      >
+        <div class="caption d-none d-md-block">
+          <h2>{{ slide.title }}</h2>
+          <p>{{ slide.text }}</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev" aria-label="Anterior">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next" aria-label="Siguiente">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
