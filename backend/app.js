@@ -1,28 +1,36 @@
-'use strict';
-
-const express = require('express');
-const cors = require('cors');
+const express=require('express');
+const dotenv = require('dotenv');
+const{initDB}=require('./bd/BD');
+const cors=require('cors');
 const bodyParser = require('body-parser');
 
-// Inicializar app
-const app = express();
+//just for changes
+const app=express();
+const port=process.env.PORT || 8080;
 
-// Middlewares
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+dotenv.config();
 
-// Cabeceras CORS personalizadas
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
+    );
     next();
+  });
+app.use(cors({methods:['GET','POST','PUT','DELETE','UPDATE','PATCH']}));
+app.use(cors({origin:'*'}));
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+
+initDB((err,database)=>{
+    if(err){
+        console.error('Error connecting to the database:',err);
+        return;
+    }
 });
 
-// Rutas
-app.use('/api/eventos', require('./routes/evento.routes'));
+app.use('/',require('./routes'));
 
-// Exportar app
-module.exports = app;
+app.listen(port,()=>{console.log(`Running on port: ${port}`)});
