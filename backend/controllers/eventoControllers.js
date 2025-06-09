@@ -25,7 +25,8 @@ const createEvento = async (req, res) => {
         const savedEvento = await evento.save();
         res.status(201).json(savedEvento);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error('Error al crear el evento controlador:', error);
+        res.status(400).json({ messageCONTROLADOR: error.message });
     }
 }
 const updateEventoById = async (req, res) => {

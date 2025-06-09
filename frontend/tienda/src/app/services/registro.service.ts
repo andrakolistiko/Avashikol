@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RegistroService {
-  private apiUrl = 'http://localhost:8080/api/usuarios'; // cambia si es necesario
+  private apiUrl = 'http://localhost:3000/api/usuarios'; // cambia si es necesario
 
   constructor(private http: HttpClient) {}
 

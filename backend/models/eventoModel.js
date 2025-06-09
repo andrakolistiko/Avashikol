@@ -10,19 +10,21 @@ const EventoSchema = new mongoose.Schema({
   },
   descripcion: {
     type: String,
-    required: [true, 'La descripción es obligatoria'],
-    minlength: [10, 'La descripción debe tener al menos 10 caracteres'],
+    
+    
     maxlength: [100, 'La descripción no puede tener más de 100 caracteres']
   },
   fecha: {
     type: Date,
     required: [true, 'La fecha es obligatoria'],
     validate: {
-      validator: function(value) {
-        return value > new Date();
-      },
-      message: 'La fecha debe ser en el futuro'
-    }
+  validator: function(value) {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0); // elimina horas/minutos/segundos
+    return value > hoy;
+  },
+  message: 'La fecha debe ser posterior a hoy'
+}
   },
   lugar: {
     type: String,
