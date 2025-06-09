@@ -17,32 +17,43 @@ const validateEventoID = [
 // Validar cuerpo para crear un evento
 const validateCreateEventoBody = [
   body().notEmpty().withMessage('El cuerpo no puede estar vacío'),
+
   body('titulo')
     .isString().withMessage('El título debe ser un texto')
     .isLength({ min: 3, max: 100 }).withMessage('El título debe tener entre 3 y 100 caracteres'),
+
   body('descripcion')
     .isString().withMessage('La descripción debe ser un texto')
-    .isLength({ min: 10, max: 100 }).withMessage('La descripción debe tener entre 10 y 100 caracteres'),
+    .isLength({ min: 1, max: 100 }).withMessage('La descripción debe tener entre 10 y 100 caracteres'),
+
   body('fecha')
     .isISO8601().withMessage('La fecha debe tener formato válido')
-    .custom((value) => new Date(value) > new Date()).withMessage('La fecha debe ser en el futuro'),
+    .custom((value) => {
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+      return new Date(value) > hoy;
+    }).withMessage('La fecha debe ser posterior al día de hoy'),
+
   body('lugar')
     .isString().withMessage('El lugar debe ser un texto')
     .isLength({ min: 3, max: 100 }).withMessage('El lugar debe tener entre 3 y 100 caracteres'),
+
   body('precio')
     .isNumeric().withMessage('El precio debe ser un número')
     .custom((value) => value >= 0).withMessage('El precio no puede ser negativo'),
+
   body('imagen')
     .matches(/^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/).withMessage('Debe ser una URL válida de imagen'),
 
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      console.error('Errores de validación:', errors.array());
+      return res.status(400).json({ errorsValidacion: errors.array() });
     }
-    next();
     console.log('Evento creado correctamente');
     console.log('datos del evento:', req.body);
+    next();
   },
 ];
 
@@ -57,7 +68,7 @@ const validateUpdateEventoBody = [
   body('descripcion')
     .optional()
     .isString().withMessage('La descripción debe ser un texto')
-    .isLength({ min: 10, max: 100 }).withMessage('La descripción debe tener entre 10 y 100 caracteres'),
+    .isLength({ min: 1, max: 100 }).withMessage('La descripción debe tener entre 10 y 100 caracteres'),
   body('fecha')
     .optional()
     .isISO8601().withMessage('La fecha debe tener formato válido')
