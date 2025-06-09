@@ -16,11 +16,4 @@ export class NavbarComponent {
   toggleSidebar2() {
     this.sidebar2Open = !this.sidebar2Open;
   }
-  loginWithGithub() {
-    window.location.href = 'http://localhost:8080/login/github';
-  }
-
-  loginWithGoogle() {
-    window.location.href = 'http://localhost:8080/login/google';
-  }
 }
